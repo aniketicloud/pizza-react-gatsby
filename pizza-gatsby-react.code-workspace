@@ -6,5 +6,8 @@
 		{
 			"path": "sanity"
 		}
-	]
+	],
+	"settings": {
+		"editor.tabSize": 2
+	}
 }
