@@ -19,7 +19,9 @@ const ToppingStyles = styled.div`
       background: white;
       padding: 2px 5px;
     }
-    .active {
+
+    /* or use &.active */
+    &[aria-current] {
       background: var(--yellow);
     }
   }
@@ -59,7 +61,7 @@ function countPizzasInToppings(pizzas) {
   return sortedToppings;
 }
 
-export default function ToppingsFilter() {
+export default function ToppingsFilter({ activeTopping }) {
   // Get a full list of the toppings
   // Get a full list of the pizzas with their toppings
   const { pizzas } = useStaticQuery(graphql`
@@ -90,6 +92,11 @@ export default function ToppingsFilter() {
   // Link it up . . . . . .
   return (
     <ToppingStyles>
+      <Link to="/pizzas">
+        <span className="name">All</span>
+        <span className="count">{pizzas.nodes.length}</span>
+      </Link>
+      {/* className={topping.name === activeTopping ? 'active' : ''} is not needed because of gatsby is giving aria attribute for current page */}
       {toppingsWithCount.map((topping) => (
         <Link to={`/topping/${topping.name}`} key={topping.id}>
           <span className="name">{topping.name}</span>
