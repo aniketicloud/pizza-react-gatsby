@@ -108,8 +108,8 @@ async function turnSlicemastersIntoPages({ graphql, actions }) {
   `)
   // todo: 2. Turn wach slicemaster into their own page
   // 3. Figure out how many pages there are based on how many slicemasters there are, and how many per page!
-  const pageSize = parseInt(process.env.GATSBY_PAGE_SIZE);
-  const pageCount = Math.ceil(data.slicemasters.totalCount / pageSize);
+  const pageSize = parseInt(process.env.GATSBY_PAGE_SIZE); // 2
+  const pageCount = Math.ceil(data.slicemasters.totalCount / pageSize); // 10 / 2 = 5
   // 4. loop from 1 to n - and create the pages for them
   Array.from({ length: pageCount }).forEach((_,i) => {
     actions.createPage({
@@ -119,7 +119,7 @@ async function turnSlicemastersIntoPages({ graphql, actions }) {
       // as into the component's GraphQL query.
       context: {
         skip: i * pageSize,
-        currentpage: i + 1,
+        currentPage: i + 1,
         pageSize,
       }
     })
