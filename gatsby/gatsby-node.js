@@ -33,7 +33,6 @@ async function turnPizzasIntoPages({ graphql, actions }) {
 }
 
 async function turnToppingsIntoPages({ graphql, actions }) {
-  // console.log('turning toppings in to pages');
   // 1. Get the template
   const toppingsTemplate = path.resolve('./src/pages/pizzas.js');
   // 2. Query all the toppings
@@ -91,6 +90,43 @@ async function fetchBeersAndTurnIntoNodes({
   // 3. create node for that beer
 }
 
+async function turnSlicemastersIntoPages({ graphql, actions }) {
+  // 1. Query all alicemasters
+  const { data } = await graphql(`
+    query {
+      slicemasters: allSanityPerson {
+        totalCount
+        nodes {
+          name
+          id
+          slug {
+            current
+          }
+        }
+      }
+    }
+  `)
+  // todo: 2. Turn wach slicemaster into their own page
+
+  // 3. Figure out how many pages there are based on how many slicemasters there are, and how many per page!
+  const pageSize = parseInt(process.env.GATSBY_PAGE_SIZE);
+  const pageCount = Math.ceil(data.slicemasters.totalCount / pageSize);
+  // 4. loop from 1 to n - and create the pages for them
+  Array.from({ length: pageCount }).forEach((_,i) => {
+    actions.createPage({
+      path: `/slicemasters/${i + 1}`,
+      component: path.resolve('./src/pages/slicemasters.js'),
+      // The context is passed as props to the component as well
+      // as into the component's GraphQL query.
+      context: {
+        skip: i * pageSize,
+        currentpage: i,
+        pageSize,
+      }
+    })
+  })
+}
+
 export async function sourceNodes(params) {
   // fetch a list of beers and source them in to our Gatsby API !
   await Promise.all([fetchBeersAndTurnIntoNodes(params)]);
@@ -102,6 +138,7 @@ export async function createPages(params) {
   await Promise.all([
     turnPizzasIntoPages(params),
     turnToppingsIntoPages(params),
+    turnSlicemastersIntoPages(params),
   ]);
   // 1. Pizzas
   // 2. Toppings
