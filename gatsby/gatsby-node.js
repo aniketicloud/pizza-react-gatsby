@@ -81,7 +81,6 @@ async function fetchBeersAndTurnIntoNodes({
         contentDigest: createContentDigest(beer),
       },
     };
-    // console.log(nodeMeta);
     actions.createNode({
       ...beer,
       ...nodeMeta,
