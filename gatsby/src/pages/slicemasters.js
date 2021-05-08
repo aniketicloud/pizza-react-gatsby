@@ -1,9 +1,9 @@
-import { graphql, Link } from "gatsby";
-import GatsbyImage from "gatsby-image";
-import React from "react";
-import styled from "styled-components";
-import Pagination from "../components/Pagination";
-import SEO from "../components/SEO";
+import { graphql, Link } from 'gatsby';
+import GatsbyImage from 'gatsby-image';
+import React from 'react';
+import styled from 'styled-components';
+import Pagination from '../components/Pagination';
+import SEO from '../components/SEO';
 
 const SlicemasterGrid = styled.div`
   display: grid;
@@ -42,11 +42,11 @@ export default function SliceMasters({ data, pageContext }) {
   const slicemasters = data.slicemasters.nodes;
   return (
     <>
-      <SEO title={`Slicemasters -Page ${pageContext.currentPage || 1}`}></SEO>
-      <Pagination 
+      <SEO title={`Slicemasters -Page ${pageContext.currentPage || 1}`} />
+      <Pagination
         pageSize={parseInt(process.env.GATSBY_PAGE_SIZE)}
         totalCount={data.slicemasters.totalCount}
-        currentPage={pageContext.currentPage || 1} 
+        currentPage={pageContext.currentPage || 1}
         skip={pageContext.skip}
         base="/slicemasters"
       />
@@ -66,8 +66,6 @@ export default function SliceMasters({ data, pageContext }) {
     </>
   );
 }
-
-const trial = parseInt(process.env.GATSBY_PAGE_SIZE);
 
 export const query = graphql`
   query($skip: Int = 0, $pageSize: Int = 2) {
