@@ -14,7 +14,7 @@ export default function PizzaOrder({ order, pizzas, removeFromOrder }) {
         // console.log({ pizza });
         // console.log({ singleOrder });
         return (
-          <MenuItemStyles key={singleOrder.id}>
+          <MenuItemStyles key={`${singleOrder.id}-${index}`}>
             <GatsbyImage fluid={pizza.image.asset.fluid} />
             <h2>{pizza.name}</h2>
             <p>
