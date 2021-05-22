@@ -1,0 +1,2 @@
+- Don't forget to add env variables.
+- search for process.env to get the used variables
