@@ -17,15 +17,28 @@ export default function OrderPage({ data }) {
     name: '',
     email: '',
   });
-  const { order, addToOrder, removeFromOrder } = usePizza({
+  const {
+    order,
+    addToOrder,
+    removeFromOrder,
+    error,
+    loading,
+    message,
+    submitOrder,
+  } = usePizza({
     pizzas,
-    inputs: values,
+    values,
   });
+
+  if (message) {
+    return <p>{message}</p>;
+  }
+
   return (
     <div>
       {/* eslint-disable-next-line react/self-closing-comp */}
       <SEO title="Order a Pizza!"></SEO>
-      <OrderStyles>
+      <OrderStyles onSubmit={submitOrder}>
         <fieldset>
           <legend>Your Info</legend>
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
@@ -92,7 +105,10 @@ export default function OrderPage({ data }) {
           <h3>
             Your Total is {formatMoney(calculateOrderTotal(order, pizzas))}
           </h3>
-          <button type="submit">Order Ahead</button>
+          <div>{error ? <p>Error: {error}</p> : ''}</div>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Placing Order...' : 'Order Ahead'}
+          </button>
         </fieldset>
       </OrderStyles>
     </div>
