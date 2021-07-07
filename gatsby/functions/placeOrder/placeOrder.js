@@ -11,13 +11,13 @@ function generateOrderEmail({ order, total }) {
           (item) => `
         <li>
           <img src="${item.thumbnail}" alt="${item.name}" />
-          ${item.size} ${item.name} ${item.price}
+          ${item.size} ${item.name} - ${item.price}
         </li>
       `
         )
         .join('')}
     </ul>
-    <p>Your total is <strong>${total}</strong> due at pickup</p>
+    <p>Your total is <strong>$${total}</strong> due at pickup</p>
     <style>
       ul {
         list-style: none;
@@ -37,24 +37,30 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+function wait(ms = 0) {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 exports.handler = async (event, context) => {
   const body = JSON.parse(event.body);
-  console.log(body);
+  // console.log(body);
 
   // Validate the data coming in is correct
   const requiredFields = ['email', 'name', 'order'];
 
-  for (const field of requiredFields) {
-    console.log(`Checking that ${field} is good`);
-    if (!body[field]) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({
-          message: `Oops! You are missing ${field} field`,
-        }),
-      };
-    }
+  if (!body.order.length) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: `Why would you order nothing ?!?`,
+      }),
+    };
   }
+
+  // make sure they actualy have items in that
+
   // send the email
 
   // send the success or error message

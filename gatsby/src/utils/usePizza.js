@@ -37,7 +37,7 @@ export default function usePizza({ pizzas, values }) {
     // console.log(e);
     setLoading(true);
     setError(null);
-    setMessage(null);
+    // setMessage('Go Eat');
 
     // gather all the data
     const body = {
@@ -63,7 +63,7 @@ export default function usePizza({ pizzas, values }) {
 
     // check if everything worked
     if (res.status >= 400 && res.status < 600) {
-      setLoading(false); // turn off
+      setLoading(false); // turn off loading
       setError(text.message);
     } else {
       // it worked
