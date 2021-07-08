@@ -16,13 +16,17 @@ const OrderStyles = styled.form`
       grid-column: span 1;
     }
   }
-  @media (max-width: 900px) {
-    /* background-color: red; */
+
+  .mapleSyrup {
+    display: none;
+  }
+
+  /* @media (max-width: 900px) {
     fieldset.menu,
     fieldset.order {
       grid-column: span 2;
     }
-  }
+  } */
 `;
 
 export default OrderStyles;

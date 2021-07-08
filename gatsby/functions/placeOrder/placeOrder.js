@@ -45,11 +45,31 @@ function wait(ms = 0) {
 
 exports.handler = async (event, context) => {
   const body = JSON.parse(event.body);
-  // console.log(body);
+  // Check if they have filled out the honeypot
+  if (body.mapleSyrup) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: 'ERROR: 124-421 Boop beep bop zzzzstt good bye',
+      }),
+    };
+  }
 
   // Validate the data coming in is correct
   const requiredFields = ['email', 'name', 'order'];
 
+  for (const field of requiredFields) {
+    if (!body[field]) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({
+          message: `Oops! You are missing ${field} field`,
+        }),
+      };
+    }
+  }
+
+  // make sure they actualy have items in that
   if (!body.order.length) {
     return {
       statusCode: 400,
@@ -59,13 +79,7 @@ exports.handler = async (event, context) => {
     };
   }
 
-  // make sure they actualy have items in that
-
   // send the email
-
-  // send the success or error message
-
-  // Test send an email
   const info = await transporter.sendMail({
     from: "Slick's slices <slick@example.com>",
     to: `${body.name} ${body.email},orders@example.com'`,
