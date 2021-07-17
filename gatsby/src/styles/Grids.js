@@ -21,10 +21,13 @@ export const ItemStyles = styled.div`
     height: auto;
   }
   p {
-    width: 100%;
+    transform: rotate(-2deg) translateY(-140%);
     position: absolute;
-    transform: rotate(-2deg) translateY(-50%);
+    width: 100%;
     left: 0;
+    /* word-wrap: break-word; */
+    overflow: hidden;
+    white-space: nowrap;
   }
   .mark {
     display: inline;
