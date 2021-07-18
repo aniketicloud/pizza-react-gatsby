@@ -24,6 +24,7 @@ const SingleBeerStyles = styled.div`
 `;
 
 export default function BeersPage({ data }) {
+  const renderedBeers = data.beers.nodes.filter((beer, index) => index < 10);
   return (
     <>
       <SEO title={`Beers! We have ${data.beers.nodes.length} in stock`} />
@@ -31,7 +32,7 @@ export default function BeersPage({ data }) {
         We have {data.beers.nodes.length} Beers available. Dine in Only !
       </h2>
       <BeerGridStyles>
-        {data.beers.nodes.map((beer) => {
+        {renderedBeers.map((beer) => {
           const rating = Math.round(beer.rating.average);
           return (
             <SingleBeerStyles key={beer.id}>
@@ -57,6 +58,7 @@ export const query = graphql`
   query {
     beers: allBeer {
       nodes {
+        id
         name
         price
         image
