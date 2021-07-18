@@ -17,7 +17,6 @@ export const ItemStyles = styled.div`
   text-align: center;
   position: relative;
   img {
-    border: 1px solid green;
     height: auto;
   }
   p {
