@@ -8,7 +8,13 @@ export default function PizzasPage({ data, pageContext }) {
   const pizzas = data.pizzas.nodes;
   return (
     <>
-      <SEO title={pageContext.topping ? `Pizzas with ${pageContext.topping}`: `All Pizzas`}></SEO>
+      <SEO
+        title={
+          pageContext.topping
+            ? `Pizzas with ${pageContext.topping}`
+            : `All Pizzas`
+        }
+      />
       <ToppingsFilter activeTopping={pageContext.topping} />
       <PizzaList pizzas={pizzas} />
     </>

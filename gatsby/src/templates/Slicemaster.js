@@ -1,13 +1,13 @@
-import { graphql } from "gatsby";
-import GatsbyImage from "gatsby-image";
-import React from "react";
-import SEO from "../components/SEO";
+import { graphql } from 'gatsby';
+import GatsbyImage from 'gatsby-image';
+import React from 'react';
+import SEO from '../components/SEO';
 // GatsbyImage while importing the name is GatsbyImage not Img
 
 export default function SlicemasterPage({ data: { person } }) {
   return (
     <>
-      <SEO title={person.name} image={person.image.asset.fluid}></SEO>
+      <SEO title={person.name} image={person.image.asset.fluid} />
       <div className="center">
         <GatsbyImage fluid={person.image.asset.fluid} />
         <h2>

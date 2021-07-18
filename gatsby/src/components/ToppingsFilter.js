@@ -57,7 +57,7 @@ function countPizzasInToppings(pizzas) {
   return sortedToppings;
 }
 
-export default function ToppingsFilter({ activeTopping }) {
+export default function ToppingsFilter() {
   // Get a full list of the toppings
   // Get a full list of the pizzas with their toppings
   const { pizzas } = useStaticQuery(graphql`

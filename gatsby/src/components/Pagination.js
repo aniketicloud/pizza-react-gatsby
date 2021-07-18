@@ -1,6 +1,6 @@
-import { Link } from "gatsby";
-import React from "react";
-import styled from "styled-components";
+import { Link } from 'gatsby';
+import React from 'react';
+import styled from 'styled-components';
 
 const PaginationStyles = styled.div`
   display: flex;
@@ -16,23 +16,21 @@ const PaginationStyles = styled.div`
     flex: 1;
     border-right: 1px solid var(--grey);
     text-decoration: none;
-    &[aria-current], 
+    &[aria-current],
     &.current {
-      color: var(--red)
+      color: var(--red);
     }
     &[disabled] {
       pointer-events: none;
-      color: var(--grey)
+      color: var(--grey);
     }
   }
-
 `;
 
 export default function Pagination({
   pageSize,
   totalCount,
   currentPage,
-  skip,
   base,
 }) {
   // make some variables
@@ -43,13 +41,21 @@ export default function Pagination({
   const hasPrevPage = prevPage >= 1;
   return (
     <PaginationStyles>
-      <Link disabled={!hasPrevPage} to={`${base}/${prevPage}`}>← Prev</Link>
-      {
-        Array.from({length: totalPages }).map((_,i) => (
-          <Link className={currentPage === 1 && i === 0 ? 'current' : ''} key={i} to={`${base}/${ i > 0 ? i +1 : ''}`}>{ i + 1 }</Link>
-        ))
-      }
-      <Link disabled={!hasNextPage} to={`${base}/${nextPage}`}>→ Next</Link>
+      <Link disabled={!hasPrevPage} to={`${base}/${prevPage}`}>
+        ← Prev
+      </Link>
+      {Array.from({ length: totalPages }).map((_, i) => (
+        <Link
+          className={currentPage === 1 && i === 0 ? 'current' : ''}
+          key={i}
+          to={`${base}/${i > 0 ? i + 1 : ''}`}
+        >
+          {i + 1}
+        </Link>
+      ))}
+      <Link disabled={!hasNextPage} to={`${base}/${nextPage}`}>
+        → Next
+      </Link>
     </PaginationStyles>
   );
 }

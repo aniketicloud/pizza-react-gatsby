@@ -1,9 +1,9 @@
-import React from "react";
-import { graphql } from "gatsby";
+import React from 'react';
+import { graphql } from 'gatsby';
 // GatsbyImage while importing the name is GatsbyImage not Img
-import Img from "gatsby-image";
-import styled from "styled-components";
-import SEO from "../components/SEO";
+import Img from 'gatsby-image';
+import styled from 'styled-components';
+import SEO from '../components/SEO';
 
 const PizzaGrid = styled.div`
   display: grid;
@@ -14,7 +14,7 @@ const PizzaGrid = styled.div`
 export default function SinglePizzaPage({ data: { pizza } }) {
   return (
     <>
-      <SEO title={pizza.name} image={pizza.image?.asset?.fluid?.src}></SEO>
+      <SEO title={pizza.name} image={pizza.image?.asset?.fluid?.src} />
       <PizzaGrid>
         <Img fluid={pizza.image.asset.fluid} />
         <div>
