@@ -27,9 +27,9 @@ export default function BeersPage({ data }) {
   const renderedBeers = data.beers.nodes.filter((beer, index) => index < 10);
   return (
     <>
-      <SEO title={`Beers! We have ${data.beers.nodes.length} in stock`} />
+      <SEO title={`Beers! We have ${renderedBeers.length} in stock`} />
       <h2 className="center">
-        We have {data.beers.nodes.length} Beers available. Dine in Only !
+        We have {renderedBeers.length} Beers available. Dine in Only !
       </h2>
       <BeerGridStyles>
         {renderedBeers.map((beer) => {
