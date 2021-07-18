@@ -3,7 +3,11 @@ import styled from 'styled-components';
 export const HomePageGrid = styled.div`
   display: grid;
   gap: 2rem;
-  grid-template-columns: repeat(2, minmax(auto, 1fr));
+  --columns: 2;
+  grid-template-columns: repeat(var(--columns), minmax(auto, 1fr));
+  @media (max-width: 800px) {
+    --columns: 1;
+  }
 `;
 
 export const ItemsGrid = styled.div`
@@ -20,13 +24,17 @@ export const ItemStyles = styled.div`
     height: auto;
   }
   p {
-    transform: rotate(-2deg) translateY(-140%);
     position: absolute;
-    width: 100%;
     left: 0;
-    /* word-wrap: break-word; */
-    overflow: hidden;
-    white-space: nowrap;
+    top: 0;
+    /* margin: 0; to override previous margin */
+    margin: 0;
+    transform: rotate(-2deg) translateY(-20px);
+    width: 100%;
+
+    /* instead of using media query for 320px, using clamp with fallback of 1.5rem */
+    font-size: 1.5rem;
+    font-size: clamp(12px, 5vw, 20px);
   }
   .mark {
     display: inline;
