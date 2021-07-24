@@ -17,7 +17,7 @@ function generateOrderEmail({ order, total }) {
         )
         .join('')}
     </ul>
-    <p>Your total is <strong>$${total}</strong> due at pickup</p>
+    <p>Your total is <strong>${total}</strong> due at pickup</p>
     <style>
       ul {
         list-style: none;
