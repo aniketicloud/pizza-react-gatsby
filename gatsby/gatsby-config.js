@@ -7,7 +7,7 @@ export default {
     title: `Slicks Slices`,
     siteUrl: 'https://gatsby.pizza',
     description: 'The best pizza place in Hamilton!',
-    twitter: '@slicksSlices'
+    twitter: '@slicksSlices',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -20,6 +20,16 @@ export default {
         dataset: 'production',
         watchMode: true,
         token: process.env.SANITY_TOKEN,
+      },
+    },
+
+    // Sentry gatsby plugin
+    {
+      resolve: '@sentry/gatsby',
+      options: {
+        dsn:
+          'https://97b6a41e900944afaedb7cb6f8eff96a@o981172.ingest.sentry.io/5935719',
+        sampleRate: 0.7,
       },
     },
   ],
